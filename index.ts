@@ -17,7 +17,15 @@ const getScrollPercentage = () => {
 
 fromEvent(document, "scroll")
   .pipe(
+    debounceTime(20),
+    tap(() => console.count("debounceTime"))
+    // tap(_ => (indicator.style.width = getScrollPercentage() + "%"))
+  )
+  .subscribe();
+fromEvent(document, "scroll")
+  .pipe(
     throttleTime(20),
-    tap(_ => (indicator.style.width = getScrollPercentage() + "%"))
+    tap(() => console.count("throttleTime"))
+    // tap(_ => (indicator.style.width = getScrollPercentage() + "%"))
   )
   .subscribe();
